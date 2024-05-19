@@ -8,9 +8,9 @@ NPROC=$(nproc)
 ARCH=$(echo $(uname -m) | tr '_' '-')
 
 # Bifrost
-git clone --recursive https://github.com/pmelsted/bifrost.git
+git clone https://github.com/pmelsted/bifrost.git
 # reset to commit prior to new color format
-git checkout 9e6f948
+git checkout 9e6f948ce2c27de32bc687502e777aebc9eab53d
 pushd bifrost
 mkdir build && cd build
 cmake .. -DMAX_KMER_SIZE=64
