@@ -2,6 +2,7 @@
 
 ![GitHub release](https://img.shields.io/github/v/release/kehrlab/popins2)
 ![GitHub Workflow Status](https://github.com/kehrlab/popins2/actions/workflows/ci.yaml/badge.svg)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-raw/kehrlab/popins2)
 ![GitHub Repo stars](https://img.shields.io/github/stars/kehrlab/PopIns2?style=social)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4890793.svg)](https://doi.org/10.5281/zenodo.4890793)
 
@@ -29,20 +30,30 @@ Population-scale detection of non-reference sequence variants using colored de B
 | [gatb-minia-pipeline](https://github.com/Krannich479/gatb-minia-pipeline) | (*submodule; no need to install*) |
 | [SeqAn](https://www.seqan.de/) | (*header library; no need to install*) |
 
-Prior to the installation make sure your system meets all the requirements. For the default settings of PopIns2 a *Bifrost* installation with MAX_KMER_SIZE=64 is required. Presently, the conda package of Bifrost does not meet this requirement. If the executables of the software dependencies (bwa, samtools, sickle) are not accessible systemwide, you have to write the full paths to the executables into a configfile (see [Installation](#installation)). Submodules and header libraries come by default with the git clone, there is no need for a manual installation. For backward compatibility PopIns2 still offers to use the *Velvet assembler* (see [popins](https://github.com/bkehr/popins) for installation recommendation).
+PopIns2 requires an installation of the *Bifrost* C++ library.
+Bifrost must be compiled from source with the `MAX_KMER_SIZE=64` setting.
+Do not use the conda package installation of Bifrost as it does not meet the requirement for larger k-mer sizes and performance optimizations.
+⚠️ **Important:** With a release on April 28, 2022, the Bifrost API underwent major changes in the implementation without backward compatibility.
+Later releases have not been tested thoroughly and might violate the objective of PopIns2.
+For the time being, please use a Bifrost version prior to _commit 703be6d_.
+The Github Actions build workflow provides one possible solution [how to reset Bifrost](https://github.com/Krannich479/PopIns2/blob/5bd83ecf79fe455f810adf084a9a7d611f3e3459/.github/build.sh#L14) to a tested release.
 <br>
-**Important update note**: With a release on April 28, 2022, the Bifrost API underwent major changes in the color implementation. The compatibility of PopIns2 with these later releases has not been tested thoroughly yet and might violate the objective of PopIns2. For the time being, using a Bifrost version prior to _commit 703be6d_ is recommended.
+The other software dependencies (bwa, samtools, sickle) must be accessible system wide, otherwise you have to write the full paths to the executables into the configfile (see [Installation](#installation)).
+The submodules and header libraries (GATB and SeqAn) come by default with the git clone, there is no need for a manual installation.
+For backward compatibility with the first major release of PopIns, PopIns2 can optionally use the *Velvet assembler* (see [popins](https://github.com/bkehr/popins) for installation recommendation).
 
 ## Installation:
 
+Make sure that all binaries of the software dependencies are globally available on your system (e.g. by appending them to your `PATH`).
+Alternatively, you can specify the paths to the binaries within the *popins2.config* prior to executing `make`.
+After the compilation with `make` you should see the binary *popins2* in the root folder.
+The PopIns2 [Wiki](https://github.com/kehrlab/PopIns2/wiki) collects known issues that might occur during installation or runtime.
 ```
 git clone --recursive https://github.com/kehrlab/PopIns2.git
 cd PopIns2
 mkdir build
 make
 ```
-
-If the binaries of the software dependencies are not globally available on your system (e.g. by appending them to your `PATH`) you have to set the paths to the binaries within the *popins2.config* prior to executing `make`. After the compilation with `make` you should see the binary *popins2* in the main folder. The PopIns2 [Wiki](https://github.com/kehrlab/PopIns2/wiki) gathers known issues that might occur during installation or runtime.
 
 ## Usage:
 
