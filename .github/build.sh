@@ -9,9 +9,9 @@ ARCH=$(echo $(uname -m) | tr '_' '-')
 
 # Bifrost
 git clone https://github.com/pmelsted/bifrost.git
-# reset to commit prior to new color format
-git reset --hard 9e6f948ce2c27de32bc687502e777aebc9eab53d
 pushd bifrost
+# reset to commit prior to new color format
+git checkout 9e6f948ce2c27de32bc687502e777aebc9eab53d
 mkdir build && cd build
 cmake .. -DMAX_KMER_SIZE=64
 sed -i '' 's/MAX_KMER_SIZE \"32\" CACHE/MAX_KMER_SIZE \"64\" CACHE/g' ../CMakeLists.txt
