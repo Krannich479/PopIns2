@@ -14,7 +14,7 @@ pushd bifrost
 git checkout 9e6f948ce2c27de32bc687502e777aebc9eab53d
 mkdir build && cd build
 cmake .. -DMAX_KMER_SIZE=64
-sed -i '' 's/MAX_KMER_SIZE \"32\" CACHE/MAX_KMER_SIZE \"64\" CACHE/g' ../CMakeLists.txt
+sed -i 's/MAX_KMER_SIZE \"32\" CACHE/MAX_KMER_SIZE \"64\" CACHE/g' ../CMakeLists.txt
 make -j$NPROC
 sudo make install
 file /usr/local/bin/Bifrost | grep $ARCH
